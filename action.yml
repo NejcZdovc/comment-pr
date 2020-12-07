@@ -1,6 +1,6 @@
-name: 'Comment PR'
+name: 'Simple comment PR'
 author: 'Nejc Zdovc'
-description: 'Action for commenting in the PR'
+description: 'Add comments in the PR with your GitHub Actions workflow.'
 inputs:
   message:
     description: 'Message for the PR'
