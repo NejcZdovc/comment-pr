@@ -1,0 +1,18 @@
+name: Example
+
+on:
+  pull_request:
+
+jobs:
+  example:
+    name: Example
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Comment
+      uses: ./
+      with:
+        message: "Hello world :wave:!"
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
