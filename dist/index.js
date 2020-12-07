@@ -11,9 +11,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_0__);
 
 const core = __webpack_require__(186)
+const { promises: fs } = __webpack_require__(747)
+const path = __webpack_require__(622)
 
 const getInputs = () => ({
   message: core.getInput('message'),
+  file: core.getInput('file'),
   singleComment: core.getInput('single_comment') === 'true',
   identifier: core.getInput('identifier'),
   githubToken: core.getInput('github_token') || process.env.GITHUB_TOKEN
@@ -27,9 +30,44 @@ const getIdentifier = () => {
   return `<!-- ${identifier} -->`
 }
 
-const getMessage = () => {
+const getFileContent = async () => {
+  const { file } = getInputs()
+
+  if (!file) {
+    return null
+  }
+
+  const filePath = path.join(__dirname, `../.github/workflows/${file}`)
+  const content = await fs.readFile(filePath, 'utf8')
+  if (!content) {
+    return null
+  }
+
+  return content.replace(/{\w+}/g, (key) => {
+    const envKey = key.substring(1, key.length - 1)
+    if (process.env[envKey]) {
+      return process.env[envKey]
+    }
+
+    return key
+  })
+}
+
+const getMessage = async () => {
   const { message } = getInputs()
-  return `${getIdentifier()}\n${message}`
+
+  let body
+  if (!message) {
+    body = await getFileContent()
+  } else {
+    body = message
+  }
+
+  if (!body) {
+    throw new Error('You need to provide message or file input')
+  }
+
+  return `${getIdentifier()}\n${body}`
 }
 
 const findComment = async (client) => {
@@ -76,9 +114,7 @@ const comment = async (client) => {
     commentId = await findComment(client)
   }
 
-  console.log(commentId)
-
-  const body = getMessage()
+  const body = await getMessage()
   if (commentId) {
     await client.issues
       .updateComment({

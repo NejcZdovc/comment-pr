@@ -4,15 +4,48 @@ on:
   pull_request:
 
 jobs:
-  example:
-    name: Example
+  body:
+    name: Doing comment with message
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Get time
+      uses: actions/github-script@v3
+      id: get-time
+      with:
+        script: return new Date().toString()
+        result-encoding: string
+
     - name: Comment
       uses: ./
       with:
-        message: "Hello world :wave:!"
+        message: >
+          Hello world :wave:!
+          ${{steps.get-time.outputs.result}}
+        identifier: 'GITHUB_COMMIT_BODY'
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  file:
+    name: Doing comment with file
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Get time
+      uses: actions/github-script@v3
+      id: get-time
+      with:
+        script: return new Date().toString()
+        result-encoding: string
+
+    - name: Comment
+      uses: ./
+      with:
+        file: 'comment.md'
+        identifier: 'GITHUB_COMMIT_FILE'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        DATE: ${{steps.get-time.outputs.result}}

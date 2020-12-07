@@ -4,7 +4,8 @@ description: 'Add comments in the PR with your GitHub Actions workflow.'
 inputs:
   message:
     description: 'Message for the PR'
-    required: true
+  file:
+    description: 'Name for comment md file'
   single_comment:
     description: 'Would you only like one comment from the action in the PR?'
     default: 'true'
