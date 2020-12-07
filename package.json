@@ -1,0 +1,34 @@
+{
+  "name": "comment-pr",
+  "version": "1.0.0",
+  "description": "Github action for commenting in the PR",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "build": "ncc build index.js --license licenses.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NejcZdovc/comment-pr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NejcZdovc/comment-pr/issues"
+  },
+  "homepage": "https://github.com/NejcZdovc/comment-pr#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.25.1",
+    "standard": "^16.0.3"
+  },
+  "standard": {
+    "ignore": [
+      "dist"
+    ]
+  }
+}
