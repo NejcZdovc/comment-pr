@@ -37,7 +37,7 @@ const getFileContent = async () => {
     return null
   }
 
-  const filePath = path.join(__dirname, `../.github/workflows/${file}`)
+  const filePath = path.resolve(process.cwd(), `.github/workflows/${file}`)
   const content = await fs.readFile(filePath, 'utf8')
   if (!content) {
     return null
