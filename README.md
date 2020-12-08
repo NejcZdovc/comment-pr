@@ -4,6 +4,9 @@ Simple action that allows you to add comments to the PR in your workflow.
 
 You can do multiple comments during the workflow execution via different identifiers. See example [bellow](example).
 
+![image](https://user-images.githubusercontent.com/9574457/101458359-14360080-3937-11eb-9e5c-dde50b2687c8.png)
+
+
 ## Inputs
 
 | Name | Description | Required | Default |
@@ -62,7 +65,6 @@ Example of `comment.md` that uses `DATA` env variable.
 It's almost end of {DATA}!
 ```
 
-
 ### Multiple comments
 With specifying different `identifier` per step we will now track two different comments, and they will be updated accordingly.
 ```yaml
@@ -91,6 +93,8 @@ steps:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
 
+### In action
+Checkout workflow in action in this repo, follow this [link](workflow).
 
 ## Github token
 
@@ -122,3 +126,4 @@ Please file an issue for bugs, missing documentation, or unexpected behavior.
 
 [license]: https://github.com/NejcZdovc/comment-pr/blob/master/LICENSE
 [example]: https://github.com/NejcZdovc/comment-pr#multiple-comments
+[workflow]: https://github.com/NejcZdovc/comment-pr/blob/main/.github/workflows/example.yml
