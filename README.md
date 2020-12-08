@@ -1,6 +1,6 @@
 # Add comments to a PR with Github Actions
 
-Simple action that allows you to add comments to the PR in your workflow.
+A simple action that allows you to add comments to the PR in your workflow.
 
 You can do multiple comments during the workflow execution via different identifiers. See example [bellow](example).
 
@@ -12,9 +12,9 @@ You can do multiple comments during the workflow execution via different identif
 | Name | Description | Required | Default |
 | ---- | ----------- | -------- | ------- |
 | message | Message that you want in the comment (markdown supported) | message or file | |
-| file | File name of the message (file needs to be placed in `.github/workflows/`) | message or file | |
-| single_comment | Would you like to update existing comment (if exists) instead of creating new one every time? | no | true |
-| identifier | Identifier that we put as comment in the comment, so that we can identify them | no | `GITHUB_ACTION_COMMENT_PR` |
+| file | Filename of the message (file needs to be placed in `.github/workflows/`) | message or file | |
+| single_comment | Would you like to update the existing comment (if exists) instead of creating a new one every time? | no | true |
+| identifier | Identifier that we put a comment in the comment so that we can identify them | no | `GITHUB_ACTION_COMMENT_PR` |
 | github_token | Github token that we use to create/update commit | yes | |
 
 It's required to provide `message` or `file` input. If both are provided `message` input will be used.
@@ -45,7 +45,7 @@ env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
 
-File should be placed in `.github/workflows` and it should be `.md`.
+The file should be placed in `.github/workflows` and it should be `.md`.
 
 ### Passing data in md file
 
@@ -57,16 +57,17 @@ env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   DATA: 'year 2020'
 ```
-When you need to pass data from workflow info file you just define new env variable.
+
+When you need to pass data from the workflow info file you just define a new env variable.
 That will be automatically replaced in the template.
 
 Example of `comment.md` that uses `DATA` env variable.
 ```md
-It's almost end of {DATA}!
+It's almost the end of {DATA}!
 ```
 
 ### Multiple comments
-With specifying different `identifier` per step we will now track two different comments, and they will be updated accordingly.
+By specifying different `identifier` per step we will now track two different comments, and they will be updated accordingly.
 ```yaml
 steps:
   - name: Checkout
@@ -98,7 +99,7 @@ Checkout workflow in action in this repo, follow this [link](workflow).
 
 ## Github token
 
-You can pass github token two ways:
+You can pass Github token two ways:
 
 #### Via input
 ```yaml
