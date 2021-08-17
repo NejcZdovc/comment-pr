@@ -14,7 +14,6 @@ inputs:
     default: 'GITHUB_ACTION_COMMENT_PR'
   github_token:
     description: 'Github token that is used for commenting'
-    required: true
 outputs:
   commented:
     description: 'Tells you if comment was added to the PR or not, boolean'
