@@ -15,7 +15,7 @@ You can do multiple comments during the workflow execution via different identif
 | file | Filename of the message (file needs to be placed in `.github/workflows/`) | message or file | |
 | single_comment | Would you like to update the existing comment (if exists) instead of creating a new one every time? | no | true |
 | identifier | Identifier that we put a comment in the comment so that we can identify them | no | `GITHUB_ACTION_COMMENT_PR` |
-| github_token | Github token that we use to create/update commit | yes | |
+| github_toke | Github token that we use to create/update commit | yes | |
 
 It's required to provide `message` or `file` input. If both are provided `message` input will be used.
 
