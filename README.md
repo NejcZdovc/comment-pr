@@ -15,7 +15,7 @@ You can do multiple comments during the workflow execution via different identif
 | file | Filename of the message (file needs to be placed in `.github/workflows/`) | message or file | |
 | single_comment | Would you like to update the existing comment (if exists) instead of creating a new one every time? | no | true |
 | identifier | Identifier that we put a comment in the comment so that we can identify them | no | `GITHUB_ACTION_COMMENT_PR` |
-| github_token | Github token that we use to create/update commit | yes | |
+| github_token | GitHub token that we use to create/update commit | no | `process.env.GITHUB_TOKEN` |
 
 It's required to provide `message` or `file` input. If both are provided `message` input will be used.
 
@@ -97,9 +97,9 @@ steps:
 ### In action
 Checkout workflow in action in this repo, follow this [link](workflow).
 
-## Github token
+## GitHub token
 
-You can pass Github token two ways:
+You can pass GitHub token two ways:
 
 #### Via input
 ```yaml
