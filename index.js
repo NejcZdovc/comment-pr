@@ -14,7 +14,7 @@ const getInputs = () => ({
 const getIdentifier = () => {
   const { identifier } = getInputs()
   if (!identifier) {
-    throw new Error('Identifier is should not be empty string, identifier is optional.')
+    throw new Error('Identifier should not be an empty string, identifier is optional.')
   }
   return `<!-- ${identifier} -->`
 }
@@ -85,7 +85,7 @@ const getClient = () => {
   }
 
   if (!context.issue.number) {
-    throw new Error('This is not PR or commenting is disabled.')
+    throw new Error('This is not a PR or commenting is disabled.')
   }
 
   const client = getOctokit(githubToken)
