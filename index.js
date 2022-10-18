@@ -60,7 +60,7 @@ const getMessage = async () => {
 }
 
 const findComment = async (client) => {
-  const comments = await client.issues
+  const comments = await client.rest.issues
     .listComments({
       owner: context.issue.owner,
       repo: context.issue.repo,
@@ -105,7 +105,7 @@ const comment = async (client) => {
 
   const body = await getMessage()
   if (commentId) {
-    await client.issues
+    await client.rest.issues
       .updateComment({
         owner: context.issue.owner,
         repo: context.issue.repo,
@@ -116,7 +116,7 @@ const comment = async (client) => {
     return
   }
 
-  await client.issues
+  await client.rest.issues
     .createComment({
       issue_number: context.issue.number,
       owner: context.repo.owner,
