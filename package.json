@@ -1,6 +1,6 @@
 {
   "name": "comment-pr",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Github action for commenting in the PR",
   "main": "index.js",
   "scripts": {
@@ -19,12 +19,12 @@
   },
   "homepage": "https://github.com/NejcZdovc/comment-pr#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0"
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.25.1",
-    "standard": "^16.0.3"
+    "@vercel/ncc": "^0.34.0",
+    "standard": "^17.0.0"
   },
   "standard": {
     "ignore": [

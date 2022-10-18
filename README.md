@@ -29,7 +29,7 @@ It's required to provide `message` or `file` input. If both are provided `messag
 
 ### Simple comment
 ```yaml
-uses: NejcZdovc/comment-pr@v1
+uses: NejcZdovc/comment-pr@v2
 with:
   message: "Hello world"
 env:
@@ -38,7 +38,7 @@ env:
 
 ### Simple comment via file
 ```yaml
-uses: NejcZdovc/comment-pr@v1
+uses: NejcZdovc/comment-pr@v2
 with:
   file: "comment.md"
 env:
@@ -50,7 +50,7 @@ The file should be placed in `.github/workflows` and it should be `.md`.
 ### Passing data in md file
 
 ```yaml
-uses: NejcZdovc/comment-pr@v1
+uses: NejcZdovc/comment-pr@v2
 with:
   file: "comment.md"
 env:
@@ -71,22 +71,22 @@ By specifying different `identifier` per step we will now track two different co
 ```yaml
 steps:
   - name: Checkout
-    uses: actions/checkout@v2
+    uses: actions/checkout@v3
   - name: Comment Checkout
-    uses: NejcZdovc/comment-pr@v1
+    uses: NejcZdovc/comment-pr@v2
     with:
       message: "Checkout completed!"
       identifier: "GITHUB_COMMENT_CHECKOUT"
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   - name: Get time
-    uses: actions/github-script@v3
+    uses: actions/github-script@v6
     id: get-time
     with:
         script: return new Date().toString()
         result-encoding: string
   - name: Comment time
-    uses: NejcZdovc/comment-pr@v1
+    uses: NejcZdovc/comment-pr@v2
     with:
       message: "Execution time: `${{steps.get-time.outputs.result}}`"
       identifier: "GITHUB_COMMENT_SCRIPT"
@@ -103,7 +103,7 @@ You can pass GitHub token two ways:
 
 #### Via input
 ```yaml
-uses: NejcZdovc/comment-pr@v1
+uses: NejcZdovc/comment-pr@v2
 with:
   message: "Hello world"
   github_token: ${{secrets.GITHUB_TOKEN}}
@@ -111,7 +111,7 @@ with:
 
 #### Via environment variable  
 ```yaml
-uses: NejcZdovc/comment-pr@v1
+uses: NejcZdovc/comment-pr@v2
 with:
   message: "Hello world"
 env:
