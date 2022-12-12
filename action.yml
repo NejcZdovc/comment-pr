@@ -9,6 +9,9 @@ inputs:
   single_comment:
     description: 'Would you only like one comment from the action in the PR?'
     default: 'true'
+  issue_number:
+    description: 'PR issue number to comment (default: current one)'
+    default: ''
   identifier:
     description: 'Hidden message that is used to identify comment PR'
     default: 'GITHUB_ACTION_COMMENT_PR'

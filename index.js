@@ -8,6 +8,7 @@ const getInputs = () => ({
   file: core.getInput('file'),
   singleComment: core.getInput('single_comment') === 'true',
   identifier: core.getInput('identifier'),
+  issueNumber: core.getInput('issue_number'),
   githubToken: core.getInput('github_token') || process.env.GITHUB_TOKEN
 })
 
@@ -60,11 +61,15 @@ const getMessage = async () => {
 }
 
 const findComment = async (client) => {
+  let { issueNumber } = getInputs()
+  if (!issueNumber) {
+    issueNumber = context.issue.number
+  }
   const comments = await client.rest.issues
     .listComments({
       owner: context.issue.owner,
       repo: context.issue.repo,
-      issue_number: context.issue.number
+      issue_number: issueNumber
     })
 
   const identifier = getIdentifier()
@@ -79,12 +84,13 @@ const findComment = async (client) => {
 }
 
 const getClient = () => {
-  const { githubToken } = getInputs()
+  const { githubToken, issueNumber } = getInputs()
+
   if (!githubToken) {
     throw new Error('No github token provided')
   }
 
-  if (!context.issue.number) {
+  if ((!issueNumber) && (!context.issue.number)) {
     throw new Error('This is not a PR or commenting is disabled.')
   }
 
@@ -98,9 +104,13 @@ const getClient = () => {
 
 const comment = async (client) => {
   const { singleComment } = getInputs()
+  let { issueNumber } = getInputs()
   let commentId = null
   if (singleComment) {
     commentId = await findComment(client)
+  }
+  if (!issueNumber) {
+    issueNumber = context.issue.number
   }
 
   const body = await getMessage()
@@ -118,7 +128,7 @@ const comment = async (client) => {
 
   await client.rest.issues
     .createComment({
-      issue_number: context.issue.number,
+      issue_number: issueNumber,
       owner: context.repo.owner,
       repo: context.repo.repo,
       body
